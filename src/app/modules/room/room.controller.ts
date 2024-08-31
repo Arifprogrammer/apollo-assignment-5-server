@@ -38,11 +38,11 @@ export const getSingleRoom = catchAsync(async (req, res) => {
 })
 
 export const getAllRoom = catchAsync(async (req, res) => {
-  const data = await RoomService.getAllRoom()
+  const data = await RoomService.getAllRoom(req.query)
 
-  if (!data.length) {
+  if (!data.result.length) {
     respond(res, {
-      data,
+      data: data.result,
       success: false,
       statusCode: httpStatus.NOT_FOUND,
       message: 'No Data Found',
@@ -50,7 +50,8 @@ export const getAllRoom = catchAsync(async (req, res) => {
   }
 
   respond(res, {
-    data,
+    data: data.result,
+    meta: data.meta,
     success: true,
     statusCode: httpStatus.OK,
     message: 'Rooms retrieved successfully',

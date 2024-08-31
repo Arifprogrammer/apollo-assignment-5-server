@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 export const roomCreateValidationSchema = z.object({
+  images: z.string().array().default([]),
   name: z
     .string({
       required_error: 'Name is required',

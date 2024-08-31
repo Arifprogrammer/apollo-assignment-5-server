@@ -4,6 +4,10 @@ import { RoomModel } from './room.interface'
 
 const roomSchema = new Schema<TRoom, RoomModel>(
   {
+    images: {
+      type: [String],
+      default: [],
+    },
     name: {
       type: String,
       required: [true, 'Name is required'],

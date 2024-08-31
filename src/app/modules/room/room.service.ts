@@ -3,6 +3,7 @@ import AppError from '../../errors/AppError'
 import { Room } from './room.model'
 import { TRoom } from './room.validation'
 import { ObjectId } from 'mongoose'
+import QueryBuilder from '../../builder/QueryBuilder'
 
 class Service {
   async createRoom(room: TRoom) {
@@ -17,8 +18,21 @@ class Service {
     return room
   }
 
-  async getAllRoom() {
-    return await Room.find()
+  async getAllRoom(query: Record<string, unknown>) {
+    const roomQuery = new QueryBuilder(Room.find(), query)
+      .search(['name'])
+      .filter()
+      .sort()
+      .paginate()
+      .fields()
+
+    const result = await roomQuery.modelQuery
+    const meta = await roomQuery.countTotal()
+
+    return {
+      meta,
+      result,
+    }
   }
 
   async updateRoom(id: ObjectId, data: Partial<TRoom>) {
