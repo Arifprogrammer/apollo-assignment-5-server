@@ -11,15 +11,9 @@ export function respond(
     [key: string]: unknown
   },
 ) {
-  const { data, statusCode, message, success, token } = input
-
-  return res.status(statusCode).json(
+  return res.status(input.statusCode).json(
     shake({
-      statusCode,
-      success,
-      message,
-      data,
-      token,
+      ...input,
     }),
   )
 }

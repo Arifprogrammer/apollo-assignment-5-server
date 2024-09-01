@@ -21,7 +21,6 @@ class Service {
   async getAllRoom(query: Record<string, unknown>) {
     const roomQuery = new QueryBuilder(Room.find(), query)
       .search(['name'])
-      .filter()
       .sort()
       .paginate()
       .fields()
