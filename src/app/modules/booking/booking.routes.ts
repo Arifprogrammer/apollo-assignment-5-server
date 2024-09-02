@@ -3,6 +3,7 @@ import { validateBody } from '../../middlewares/validate-zod.middleware'
 import {
   createBooking,
   deleteBooking,
+  getAllBooking,
   getMyBooking,
   updateBooking,
 } from './booking.controller'
@@ -15,19 +16,19 @@ import { authenticateToken } from '../../middlewares/authenticateToken.middlewar
 const router = Router()
 
 router.post(
-  '/bookings',
+  '/',
   authenticateToken(),
   validateBody(bookingCreateValidationSchema),
   createBooking,
 )
-
+router.get('/', authenticateToken('admin'), getAllBooking)
 router.get('/my-bookings', authenticateToken(), getMyBooking)
 router.put(
-  '/bookings/:id',
+  '/:id',
   authenticateToken('admin'),
   validateBody(bookingUpdateValidationSchema),
   updateBooking,
 )
-router.delete('/bookings/:id', authenticateToken('admin'), deleteBooking)
+router.delete('/:id', authenticateToken('admin'), deleteBooking)
 
 export const bookingRouter = router

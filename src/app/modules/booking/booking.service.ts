@@ -55,6 +55,13 @@ class Service {
       .populate({ path: 'user', select: '-password' })
   }
 
+  async getAllBooking() {
+    return await Booking.find()
+      .populate('slots')
+      .populate('room')
+      .populate('user')
+  }
+
   async getMyBooking(userEmail: string) {
     const user = await User.findOne({ email: userEmail }).select('-password')
 

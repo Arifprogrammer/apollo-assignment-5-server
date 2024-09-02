@@ -36,7 +36,9 @@ class Service {
   async getAllSlots(queryParams: Pick<TSlot, 'date' | 'room'>) {
     const { date, room } = queryParams
 
-    if (!room) throw new AppError(httpStatus.BAD_REQUEST, 'Room does not exist')
+    if (room && !(await Room.isRoomExist(room))) {
+      throw new AppError(httpStatus.BAD_REQUEST, 'Room does not exist')
+    }
 
     if (!Object.values(shake(queryParams)).length) {
       return await Slot.find({ isBooked: false })

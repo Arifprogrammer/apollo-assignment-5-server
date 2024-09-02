@@ -16,6 +16,26 @@ export const createBooking = catchAsync(async (req, res) => {
   })
 })
 
+export const getAllBooking = catchAsync(async (req, res) => {
+  const data = await BookingService.getAllBooking()
+
+  if (!data.length) {
+    respond(res, {
+      data,
+      success: false,
+      statusCode: httpStatus.NOT_FOUND,
+      message: 'No Data Found',
+    })
+  }
+
+  respond(res, {
+    data,
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'All bookings retrieved successfully',
+  })
+})
+
 export const getMyBooking = catchAsync(async (req, res) => {
   const user = req.user
   const data = await BookingService.getMyBooking(user.email)
