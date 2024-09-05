@@ -2,6 +2,7 @@ import { Router } from 'express'
 import { validateBody } from '../../middlewares/validate-zod.middleware'
 import {
   createBooking,
+  createPaymentIntent,
   deleteBooking,
   getAllBooking,
   getMyBooking,
@@ -21,6 +22,7 @@ router.post(
   validateBody(bookingCreateValidationSchema),
   createBooking,
 )
+router.post('/create-payment-intent', authenticateToken(), createPaymentIntent)
 router.get('/', authenticateToken('admin'), getAllBooking)
 router.get('/my-bookings', authenticateToken(), getMyBooking)
 router.put(

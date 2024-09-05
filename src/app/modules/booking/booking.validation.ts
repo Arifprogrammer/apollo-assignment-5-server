@@ -23,6 +23,12 @@ export const bookingCreateValidationSchema = z.object({
       invalid_type_error: 'Booking date must be a string',
     })
     .trim(),
+  transactionId: z
+    .string({
+      required_error: 'TransactionId is required',
+      invalid_type_error: 'TransactionId must be a string',
+    })
+    .trim(),
   isConfirmed: z
     .enum(['confirmed', 'unconfirmed', 'canceled'], {
       required_error: 'Booking status is required',

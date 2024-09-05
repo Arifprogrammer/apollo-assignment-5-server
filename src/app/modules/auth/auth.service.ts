@@ -37,7 +37,12 @@ class Service {
       throw new AppError(httpStatus.BAD_REQUEST, 'Incorrect Password')
     }
 
-    const token = this.createToken(existingUser.email, existingUser.role)
+    const token = this.createToken(
+      existingUser.email,
+      existingUser.role,
+      existingUser.id!,
+      existingUser.name,
+    )
     const userWithOutPass = await User.userWithoutPassword(
       existingUser.id as ObjectId,
     )
@@ -45,10 +50,12 @@ class Service {
     return { userWithOutPass, token }
   }
 
-  private createToken(email: string, role: string) {
+  private createToken(email: string, role: string, id: ObjectId, name: string) {
     const payload: JwtPayload = {
-      email: email,
-      role: role,
+      email,
+      role,
+      id,
+      name,
     }
 
     return jwt.sign(payload, config.JWT_SECRET, {

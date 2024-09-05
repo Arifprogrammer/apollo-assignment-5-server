@@ -45,7 +45,7 @@ export const getAllRoom = catchAsync(async (req, res) => {
       data: data.result,
       success: false,
       statusCode: httpStatus.NOT_FOUND,
-      message: 'No Data Found',
+      message: 'No Room Found',
     })
   }
 

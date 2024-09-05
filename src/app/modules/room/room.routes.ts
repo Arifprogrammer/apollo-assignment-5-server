@@ -22,7 +22,7 @@ router.post(
   createRoom,
 )
 
-router.get('/:id', getSingleRoom)
+router.get('/:id', authenticateToken(), getSingleRoom)
 router.get('/', getAllRoom)
 router.put(
   '/:id',

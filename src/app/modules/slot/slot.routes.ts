@@ -12,6 +12,6 @@ router.post(
   validateBody(slotCreateValidationSchema),
   createSlot,
 )
-router.get('/availability', getAllSlots)
+router.get('/availability', authenticateToken(), getAllSlots)
 
 export const slotRouter = router

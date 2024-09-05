@@ -31,6 +31,11 @@ const bookingSchema = new Schema<TBooking, BookingModel>(
       type: Number,
       required: [true, 'Total amount is required'],
     },
+    transactionId: {
+      type: String,
+      required: [true, 'TransactionId date is required'],
+      trim: true,
+    },
     isConfirmed: {
       type: String,
       enum: ['confirmed', 'unconfirmed', 'canceled'],

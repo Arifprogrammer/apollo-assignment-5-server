@@ -3,6 +3,9 @@ import { catchAsync } from '../../utils/catchAsync.utils'
 import { respond } from '../../utils/response.utils'
 import { ObjectId } from 'mongoose'
 import { BookingService } from './booking.service'
+import Stripe from 'stripe'
+
+const stripe = new Stripe(process.env.PAYMENT_SECRET_KEY!)
 
 export const createBooking = catchAsync(async (req, res) => {
   const booking = req.body
@@ -10,6 +13,23 @@ export const createBooking = catchAsync(async (req, res) => {
 
   respond(res, {
     data,
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Booking created successfully',
+  })
+})
+
+export const createPaymentIntent = catchAsync(async (req, res) => {
+  const { price } = req.body
+  const amount = price * 100
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: amount,
+    currency: 'usd',
+    payment_method_types: ['card'],
+  })
+
+  respond(res, {
+    clientSecret: paymentIntent.client_secret,
     success: true,
     statusCode: httpStatus.OK,
     message: 'Booking created successfully',

@@ -56,7 +56,7 @@ class Service {
   }
 
   async getAllBooking() {
-    return await Booking.find()
+    return await Booking.find({ isDeleted: false })
       .populate('slots')
       .populate('room')
       .populate('user')
@@ -65,7 +65,7 @@ class Service {
   async getMyBooking(userEmail: string) {
     const user = await User.findOne({ email: userEmail }).select('-password')
 
-    return await Booking.find({ user: user?._id })
+    return await Booking.find({ user: user?._id, isDeleted: false })
       .populate('slots')
       .populate('room')
       .select('-user')
