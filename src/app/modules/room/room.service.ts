@@ -19,7 +19,7 @@ class Service {
   }
 
   async getAllRoom(query: Record<string, unknown>) {
-    const roomQuery = new QueryBuilder(Room.find(), query)
+    const roomQuery = new QueryBuilder(Room.find({ isDeleted: false }), query)
       .search(['name'])
       .sort()
       .paginate()

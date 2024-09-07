@@ -5,7 +5,7 @@ import {
   createPaymentIntent,
   deleteBooking,
   getAllBooking,
-  getMyBooking,
+  getMyBookings,
   updateBooking,
 } from './booking.controller'
 import {
@@ -24,7 +24,7 @@ router.post(
 )
 router.post('/create-payment-intent', authenticateToken(), createPaymentIntent)
 router.get('/', authenticateToken('admin'), getAllBooking)
-router.get('/my-bookings', authenticateToken(), getMyBooking)
+router.get('/my-bookings', authenticateToken(), getMyBookings)
 router.put(
   '/:id',
   authenticateToken('admin'),
