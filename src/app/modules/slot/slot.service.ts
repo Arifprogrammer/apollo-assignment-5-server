@@ -3,19 +3,17 @@ import AppError from '../../errors/AppError'
 import { Room } from '../room/room.model'
 import { TSlot } from './slot.validation'
 import { Slot } from './slot.model'
-import { shake } from 'radash'
+import { /* list, */ shake } from 'radash'
 
 class Service {
   async createSlot(slot: TSlot) {
     const room = await Room.isRoomExist(slot.room)
     if (!room) throw new AppError(httpStatus.BAD_REQUEST, 'Room does not exist')
-    const minutesPerHour = 60
     const { startHour, endHour } = this.extractHours(
       slot.startTime,
       slot.endTime,
     )
-    const slotsCount =
-      (endHour * minutesPerHour - startHour * minutesPerHour) / minutesPerHour //* extracting slots count by minutes 300 / 60 -> 5
+    const slotsCount = endHour - startHour
 
     const slots: TSlot[] = []
     let currentStartTime = startHour - 1
@@ -41,7 +39,7 @@ class Service {
     }
 
     if (!Object.values(shake(queryParams)).length) {
-      return await Slot.find({ isBooked: false })
+      return await Slot.find({ isBooked: false }).populate('room')
     }
 
     return await Slot.find({
@@ -56,6 +54,52 @@ class Service {
           isBooked: false,
         },
       ],
+    })
+  }
+
+  async updateSlot(slot: TSlot, id: string) {
+    const isExistSlot = await Slot.findById({ _id: id })
+
+    if (!isExistSlot)
+      throw new AppError(httpStatus.BAD_REQUEST, 'Slot does not exist')
+    const { startHour, endHour } = this.extractHours(
+      slot.startTime,
+      slot.endTime,
+    )
+
+    /* const times = list(startHour, endHour)
+    times.pop()
+
+    for (const time of times) {
+      const isCreatedSlot = await Slot.findOne({
+        date: slot.date,
+        room: slot.room,
+        startTime: `${time}:00`,
+      })
+
+      if (isCreatedSlot)
+        throw new AppError(
+          httpStatus.BAD_REQUEST,
+          'Slot already created between this time',
+        )
+    } */
+
+    const isCreatedSlot = await Slot.findOne({
+      date: slot.date,
+      room: slot.room,
+      startTime: `${startHour}:00`,
+    })
+
+    if (isCreatedSlot)
+      throw new AppError(
+        httpStatus.BAD_REQUEST,
+        'Slot already created between this time',
+      )
+
+    return await Slot.updateOne({
+      _id: id,
+      startTime: `${startHour}:00`,
+      endTime: `${endHour}:00`,
     })
   }
 

@@ -42,3 +42,16 @@ export const getAllSlots = catchAsync(async (req, res) => {
     message: 'Available slots retrieved successfully',
   })
 })
+
+export const updateSlot = catchAsync(async (req, res) => {
+  const { id } = req.params
+  const slot = req.body
+  const data = await SlotService.updateSlot(slot, id)
+
+  respond(res, {
+    data,
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Slots updated successfully',
+  })
+})
