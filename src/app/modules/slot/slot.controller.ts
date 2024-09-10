@@ -55,3 +55,15 @@ export const updateSlot = catchAsync(async (req, res) => {
     message: 'Slots updated successfully',
   })
 })
+
+export const deleteSlot = catchAsync(async (req, res) => {
+  const { id } = req.params
+  const data = await SlotService.deleteSlot(id)
+
+  respond(res, {
+    data,
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Slots deleted successfully',
+  })
+})

@@ -5,7 +5,12 @@ import {
   slotCreateValidationSchema,
   slotUpdateValidationSchema,
 } from './slot.validation'
-import { createSlot, getAllSlots, updateSlot } from './slot.controller'
+import {
+  createSlot,
+  deleteSlot,
+  getAllSlots,
+  updateSlot,
+} from './slot.controller'
 
 const router = Router()
 
@@ -23,5 +28,6 @@ router.patch(
   updateSlot,
 )
 router.get('/availability', authenticateToken(), getAllSlots)
+router.delete('/:id', authenticateToken('admin'), deleteSlot)
 
 export const slotRouter = router
