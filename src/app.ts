@@ -12,7 +12,7 @@ app.use(
   cors({
     origin: [
       'http://localhost:5173',
-      // 'https://mechanical-keyboard-shop-client.vercel.app',
+      'https://reserve-realm-client.vercel.app',
     ],
     credentials: true,
   }),

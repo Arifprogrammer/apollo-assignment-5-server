@@ -1,80 +1,65 @@
-# Meeting Booking System
+# Reserve Realm - a Meeting Booking System
 
-## Welcome to Meeting Booking System
+## Welcome to the Reserve Realm Server
 
-Meeting Booking System project require **Node** and **npm** (Npm come out of the box with nodejs)
+A robust backend for managing and booking meetings. The server manages user accounts, meeting schedules, availability, and booking functionalities.
 
-## Installation
+### Prerequisites
+
+Reserve Realm project require **Node** and **npm** (Npm come out of the box with nodejs)
+
+### Installation
 
 - Make sure you latest version of nodejs installed then run the following commands:
 
-## Run Locally
-
-Clone the project
-
-```bash
-  git clone https://github.com/Arifprogrammer/apollo-assignment-3.git
-```
-
-Go to the project directory
-
-```bash
-  cd apollo-assignment-3
-```
-
-Install dependencies
-
-```bash
-  npm install
-```
-
-Start the server
-
-```bash
-  npm run dev
+```html
+git clone https://github.com/Arifprogrammer/apollo-assignment-5-server.git //
+clone the project first npm i // run the command on the root of the project npm
+run dev // run the command on the root of the project to start the project
+locally
 ```
 
 then go to: `http://localhost:5000/`
 
-## Live
+### Key Features
 
-[Link](https://meeting-room-booking-system-coral.vercel.app/)
+- User Management: User registration and login.
+- Room Management: Admin can access, create, update & delete room.
+- Meeting Scheduling: Creation, modification, and deletion of meetings.
+- Calendar Management: Real-time availability checking and scheduling conflicts detection.
+- Booking Functionality: Seamless booking process with payment gateway.
 
-## Features
+### Technology Stack
 
-**Auth**
+- Node.js 🟢
+- Express.js 🌐
+- Mongoose 🍃
+- TypeScript 📘
 
-- Authentication
-- Authorization
+### Libraries
 
-**Admin**
+- Bcrypt
+- Cors
+- Dotenv
+- HTTPS Status
+- Json Web Token
+- Radash
+- Stripe
+- TS Node Dev
+- Zod
 
-- Access, create, update & delete room.
-- Access & create slots.
-- Update & delete booking.
+### Configuration
 
-**User**
+1. Create a .env file in the root directory of the project.
+2. Add necessary configuration variables in the .env file. Example:
 
-- Access rooms.
-- Access slots.
-- Make & get booking.
+```html
+NODE_ENV=your_node_env PORT=your_port MONGODB_URL==your_db_connection_uri
+BCRYPT_SALT_ROUND=your_salt_round JWT_SECRET=your_jwt_secret
+ACCESS_TOKEN_EXPIRATION=your_access_token_expiration
+PAYMENT_SECRET_KEY=your_stripe_paymet_secret_key
+```
 
-## Environment Variables
+### Live
 
-To run this project, you will need to add the following environment variables to your .env file
-
-`NODE_ENV`
-
-`PORT`
-
-`MONGODB_URL`
-
-`BCRYPT_SALT_ROUND`
-
-`JWT_SECRET`
-
-`ACCESS_TOKEN_EXPIRATION`
-
-## Tech Stack
-
-**Server:** Node, Express, MongoDB, Mongoose, TypeScript
+[Link](https://reserve-realm-server.vercel.app)
