@@ -80,9 +80,12 @@ class Service {
   }
 
   async deleteBooking(id: ObjectId) {
-    if (!(await Booking.isBookingExist(id))) {
+    const booking = await Booking.isBookingExist(id)
+    if (!booking) {
       throw new AppError(httpStatus.BAD_REQUEST, 'Booking does not exist')
     }
+
+    await Slot.updateMany({ _id: { $in: booking.slots } }, { isBooked: false })
 
     return await Booking.findOneAndUpdate(
       { _id: id },

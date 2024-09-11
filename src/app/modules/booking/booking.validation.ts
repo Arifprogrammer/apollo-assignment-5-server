@@ -45,7 +45,7 @@ export const bookingCreateValidationSchema = z.object({
 })
 
 export const bookingUpdateValidationSchema = bookingCreateValidationSchema
-  .pick({ date: true, isConfirmed: true, isDeleted: true })
+  .pick({ isConfirmed: true })
   .partial()
 
 export type TBooking = Omit<
