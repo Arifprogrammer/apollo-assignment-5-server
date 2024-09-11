@@ -13,13 +13,19 @@ Reserve Realm project require **Node** and **npm** (Npm come out of the box with
 - Make sure you latest version of nodejs installed then run the following commands:
 
 ```html
-git clone https://github.com/Arifprogrammer/apollo-assignment-5-server.git //
-clone the project first npm i // run the command on the root of the project npm
-run dev // run the command on the root of the project to start the project
-locally
+git clone https://github.com/Arifprogrammer/apollo-assignment-5-server.git // clone the project first
+npm i // run the command on the root of the project
+npm run dev // run the command on the root of the project to start the project locally
 ```
 
 then go to: `http://localhost:5000/`
+
+### Credentials
+
+- Admin
+abc@abc.com | 1234
+- User
+abc@xyz.com | 1234
 
 ### Key Features
 
@@ -54,8 +60,11 @@ then go to: `http://localhost:5000/`
 2. Add necessary configuration variables in the .env file. Example:
 
 ```html
-NODE_ENV=your_node_env PORT=your_port MONGODB_URL==your_db_connection_uri
-BCRYPT_SALT_ROUND=your_salt_round JWT_SECRET=your_jwt_secret
+NODE_ENV=your_node_env
+PORT=your_port
+MONGODB_URL==your_db_connection_uri
+BCRYPT_SALT_ROUND=your_salt_round
+JWT_SECRET=your_jwt_secret
 ACCESS_TOKEN_EXPIRATION=your_access_token_expiration
 PAYMENT_SECRET_KEY=your_stripe_paymet_secret_key
 ```
