@@ -18,13 +18,17 @@ const router = Router()
 
 router.post(
   '/',
-  authenticateToken(),
+  authenticateToken('user'),
   validateBody(bookingCreateValidationSchema),
   createBooking,
 )
-router.post('/create-payment-intent', authenticateToken(), createPaymentIntent)
+router.post(
+  '/create-payment-intent',
+  authenticateToken('user'),
+  createPaymentIntent,
+)
 router.get('/', authenticateToken('admin'), getAllBooking)
-router.get('/my-bookings', authenticateToken(), getMyBookings)
+router.get('/my-bookings', authenticateToken('user'), getMyBookings)
 router.put(
   '/:id',
   authenticateToken('admin'),
